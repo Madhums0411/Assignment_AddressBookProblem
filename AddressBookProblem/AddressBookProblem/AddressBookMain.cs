@@ -18,7 +18,7 @@ namespace AddressBookProblem
 			while (flag)
 			{
 				Console.WriteLine("******WELCOME TO ADDRESS BOOK******");
-				Console.WriteLine("1.Create_AddressBooks \n2.Open_AddressBooks \n3.Count_TotalContacts \n4.Serch_FromAllContact \n5.DeletAddressBook \n6.StoreContactsIn_TextFile \n7.ReadContactsFrom_TextFile \n8.Exit");
+				Console.WriteLine("1.Create_AddressBooks \n2.Open_AddressBooks \n3.Count_TotalContacts \n4.Serch_FromAllContact \n5.DeletAddressBook \n6.StoreContactsIn_TextFile \n7.ReadContactsFrom_TextFile \n8.StoreContactsIn_CsvFile \n9.ReadContactsFrom_CsvFile \n10.Exit");
 				int choice = Convert.ToInt32(Console.ReadLine());
 				int size = addressBookDict.Count;
 				switch (choice)
@@ -34,13 +34,13 @@ namespace AddressBookProblem
 						}
 						MultipleAddressBook admain = new MultipleAddressBook();
 						addressBookDict.Add(book, admain);
-						Console.Clear();
+						Console.Clear();//cleares the screen, Clear method is called, the cursor automatically scrolls to the top-left corner of the window.
 						Console.WriteLine("AddressBook_Created successfully...");
 						break;
 					case 2:
 						Console.WriteLine($"You have {size} AddressBook.");
 
-						foreach (var address in addressBookDict.Keys)
+						foreach (var address in addressBookDict.Keys)//here assign it checkes key 
 						{
 							Console.WriteLine(address);
 						}
@@ -50,7 +50,7 @@ namespace AddressBookProblem
 						foreach (var address in addressBookDict)
 						{
 							ch++;
-							if (addressBookDict.ContainsKey(bookname))
+							if (addressBookDict.ContainsKey(bookname))//check that bookname oresent or not
 							{
 								Console.Clear();
 								Console.WriteLine("Opened Address_Book :-->" + bookname);
@@ -133,6 +133,28 @@ namespace AddressBookProblem
 						addressBookDict[readContacts].readFromTxtFile();
 						break;
 					case 8:
+						Console.WriteLine($"You have {size} AddressBook.");
+
+						foreach (var address in addressBookDict.Keys)
+						{
+							Console.WriteLine(address);
+						}
+						Console.Write("Enter Address_BookName : ");
+						string writeInCsv = Console.ReadLine();
+						addressBookDict[writeInCsv].writeInCsvFile();
+						break;
+					case 9:
+						Console.WriteLine($"You have {size} AddressBook.");
+
+						foreach (var address in addressBookDict.Keys)
+						{
+							Console.WriteLine(address);
+						}
+						Console.Write("Enter Address_BookName : ");
+						string readContact = Console.ReadLine();
+						addressBookDict[readContact].readFromCsvFile();
+						break;
+					case 10:
 						flag = false;
 						break;
 					default:
@@ -200,9 +222,9 @@ namespace AddressBookProblem
 						addressBookDict[bookname].Display();
 						break;
 					case 3:
-						Console.Write("Enter FirstName U want to Delet : ");
+						Console.Write("Enter FirstName U want to Delete : ");
 						string deletName = Console.ReadLine();
-						addressBookDict[bookname].DeletContact(deletName);
+						addressBookDict[bookname].DeletContact(deletName);//got ot delete contact method book name is the srting in mainmenu method
 						break;
 					case 4:
 						Console.WriteLine("Enter FirstName U want To Update");
@@ -234,7 +256,7 @@ namespace AddressBookProblem
 						switch (option)
 						{
 							case 1:
-								addressBookDict[bookname].SortAlphabetically(1);
+								addressBookDict[bookname].SortAlphabetically(1);//passing the choice as 1 2 3 asking want to sort with city state name etc
 								break;
 							case 2:
 								addressBookDict[bookname].SortAlphabetically(2);
